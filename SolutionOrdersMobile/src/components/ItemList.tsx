@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 
-// TypeScript interface dlaItem
+// TypeScript interface dla Item
 interface Item {
   id: string;
   name: string;
