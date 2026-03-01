@@ -1,6 +1,7 @@
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using SolutionOrders.API.Features.Items.Messages.DTOs;
+using SolutionOrders.API.Models;
 using SolutionOrders.API.Models.Data;
 
 namespace SolutionOrders.API.Features.Items.Providers
@@ -14,28 +15,37 @@ namespace SolutionOrders.API.Features.Items.Providers
             _context = context;
         }
 
-        public async Task<IEnumerable<ItemDto>> GetAllItemsAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Item>> GetAllItemsAsync(bool AsNoTracking = true, CancellationToken cancellationToken = default)
         {
-            var items = await _context.Items
-                .AsNoTracking()
+            var query = _context.Items
                 .Include(i => i.Category)
                 .Include(i => i.UnitOfMeasurement)
-                .Where(i => i.IsActive)
-                .OrderBy(i => i.Name)
-                .ToListAsync(cancellationToken);
+                .Where(i => i.IsActive);
 
-            return items.Adapt<IEnumerable<ItemDto>>();
+            if (AsNoTracking)
+            {
+                query = query.AsNoTracking();
+            }
+
+            return await query
+                .OrderBy(item => item.Name)
+                .ToListAsync(cancellationToken);
         }
 
-        public async Task<ItemDto?> GetItemByIdAsync(int id, CancellationToken cancellationToken = default)
+        public async Task<Item?> GetItemByIdAsync(int id, bool AsNoTracking = true, CancellationToken cancellationToken = default)
         {
-            var item = await _context.Items
-                .AsNoTracking()
-                .Include(i => i.Category)
-                .Include(i => i.UnitOfMeasurement)
-                .FirstOrDefaultAsync(i => i.IdItem == id && i.IsActive, cancellationToken);
+            var query = _context.Items
+               .Include(i => i.Category)
+               .Include(i => i.UnitOfMeasurement)
+               .Where(i => i.IsActive);
 
-            return item?.Adapt<ItemDto>();
+            if (AsNoTracking)
+            {
+                query = query.AsNoTracking();
+            }
+
+            return await query
+                .FirstOrDefaultAsync(i => i.IdItem == id && i.IsActive, cancellationToken);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Mapster;
 using MediatR;
 using SolutionOrders.API.Features.Items.Messages.DTOs;
 using SolutionOrders.API.Features.Items.Messages.Queries;
@@ -16,7 +17,8 @@ namespace SolutionOrders.API.Features.Items.Handlers.Queries
 
         public async Task<IEnumerable<ItemDto>> Handle(GetAllItemsQuery request, CancellationToken cancellationToken)
         {
-            return await _itemProvider.GetAllItemsAsync(cancellationToken);
+            return (await _itemProvider.GetAllItemsAsync(true ,cancellationToken))
+                .Adapt<IEnumerable<ItemDto>>();
         }
     }
 }
