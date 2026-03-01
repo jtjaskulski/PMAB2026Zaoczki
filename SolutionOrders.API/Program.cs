@@ -1,5 +1,7 @@
-using MediatR;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
+using SolutionOrders.API.Features.Items.Providers;
+using SolutionOrders.API.Features.Items.Services;
 using SolutionOrders.API.Models.Data;
 using System.Reflection;
 
@@ -17,7 +19,15 @@ namespace SolutionOrders.API
 
             // MediatR
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
+            // Mapster
+            TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
+
+            // Providers
+            builder.Services.AddScoped<IItemProvider, ItemProvider>();
+
             // Add services to the container.
+            builder.Services.AddTransient<IItemService, ItemService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -40,11 +50,7 @@ namespace SolutionOrders.API
                     logger.LogError(ex, "Błąd podczas migracji bazy danych");
                     throw;
                 }
-            }
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
                 app.MapOpenApi();
                 app.UseSwaggerUI(options =>
                 {
@@ -55,7 +61,6 @@ namespace SolutionOrders.API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
