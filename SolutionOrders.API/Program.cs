@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SolutionOrders.API.Models.Data;
 using System.Reflection;
@@ -40,11 +39,7 @@ namespace SolutionOrders.API
                     logger.LogError(ex, "Błąd podczas migracji bazy danych");
                     throw;
                 }
-            }
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
                 app.MapOpenApi();
                 app.UseSwaggerUI(options =>
                 {
@@ -55,7 +50,6 @@ namespace SolutionOrders.API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
