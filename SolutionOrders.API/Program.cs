@@ -27,7 +27,7 @@ namespace SolutionOrders.API
             builder.Services.AddScoped<IItemProvider, ItemProvider>();
 
             // Add services to the container.
-            builder.Services.AddScoped<IItemService, ItemService>();
+            builder.Services.AddTransient<IItemService, ItemService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

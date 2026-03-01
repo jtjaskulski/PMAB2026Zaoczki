@@ -21,7 +21,6 @@ namespace SolutionOrders.API.Features.Items.Mappings
                 .Ignore(dest => dest.OrderItems);
             
             config.NewConfig<UpdateItemCommand, Item>()
-                .Map(dest => dest.IsActive, _ => true)
                 .Ignore(dest => dest.IdItem)
                 .Ignore(dest => dest.Category)
                 .Ignore(dest => dest.UnitOfMeasurement!)

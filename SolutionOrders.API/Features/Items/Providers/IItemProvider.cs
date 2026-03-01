@@ -19,11 +19,11 @@ namespace SolutionOrders.API.Features.Items.Providers
         /// tracking behavior. If the item does not exist, the method returns <see langword="null"/>. Cancelling the
         /// provided token will abort the operation.</remarks>
         /// <param name="id">The unique identifier of the item to retrieve. Must be a positive integer.</param>
-        /// <param name="AsNoTracking">Indicates whether the item should be retrieved without tracking changes in the context. Specify <see
+        /// <param name="asNoTracking">Indicates whether the item should be retrieved without tracking changes in the context. Specify <see
         /// langword="true"/> to disable change tracking; otherwise, <see langword="false"/>.</param>
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains the item if found; otherwise,
         /// <see langword="null"/>.</returns>
-        Task<Item?> GetItemByIdAsync(int id, bool AsNoTracking = true, CancellationToken cancellationToken = default);
+        Task<Item> GetItemByIdAsync(int id, bool asNoTracking = true, CancellationToken cancellationToken = default);
     }
 }

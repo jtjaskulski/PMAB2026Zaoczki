@@ -30,20 +30,22 @@ namespace SolutionOrders.API.Features.Items.Providers
                 .ToListAsync(cancellationToken);
         }
 
-        public async Task<Item?> GetItemByIdAsync(int id, bool AsNoTracking = true, CancellationToken cancellationToken = default)
+        public async Task<Item> GetItemByIdAsync(int id, bool asNoTracking = true, CancellationToken cancellationToken = default)
         {
             var query = _context.Items
                .Include(i => i.Category)
                .Include(i => i.UnitOfMeasurement)
                .Where(i => i.IsActive);
 
-            if (AsNoTracking)
+            if (asNoTracking)
             {
                 query = query.AsNoTracking();
             }
-
-            return await query
+            
+            var item = await query
                 .FirstOrDefaultAsync(i => i.IdItem == id && i.IsActive, cancellationToken);
+            
+            return item ?? throw new KeyNotFoundException($"Produkt o ID {id} nie istnieje");
         }
     }
 }

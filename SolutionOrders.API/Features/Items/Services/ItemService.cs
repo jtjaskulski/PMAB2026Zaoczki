@@ -1,4 +1,4 @@
-﻿using SolutionOrders.API.Models;
+using SolutionOrders.API.Models;
 using SolutionOrders.API.Models.Data;
 
 namespace SolutionOrders.API.Features.Items.Services
@@ -9,11 +9,6 @@ namespace SolutionOrders.API.Features.Items.Services
         {
             context.Items.Add(item);
             await context.SaveChangesAsync(cancellationToken);
-        }
-
-        public Task UpdateItem(Item item, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
         }
     }
 }
