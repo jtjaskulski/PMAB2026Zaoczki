@@ -1,12 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, useColorScheme, StatusBar } from 'react-native';
+import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import Greeting from './src/components/Greeting';
 
 function App(): React.JSX.Element {
+  const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Hello Tomasz Litwinski test commit1!</Text>
-      <Text style={styles.subtitle}>with TypeScript 🚀</Text>
-    </View>
+    <SafeAreaView>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <ScrollView>
+        <Text style={styles.title}>Hello Tomasz Litwiński!</Text>
+        <Text style={styles.subtitle}>with TypeScript 🚀</Text>
+        <Greeting name="Tomasz" age={24} isVip={true} />
+        <Greeting name="Anna" age={30} />
+        <Greeting name="Marek" isVip={true} />
+      </ScrollView>
+    </SafeAreaView> 
   );
 }
 
