@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, useColorScheme, StatusBar } from 'react-native';
 import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import Greeting from './src/components/Greeting';
+import Counter from './src/components/Counter';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -9,6 +10,7 @@ function App(): React.JSX.Element {
     <SafeAreaView>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView>
+        <Counter />
         <Text style={styles.title}>Hello Tomasz Litwiński!</Text>
         <Text style={styles.subtitle}>with TypeScript 🚀</Text>
         <Greeting name="Tomasz" age={24} isVip={true} />
@@ -18,6 +20,8 @@ function App(): React.JSX.Element {
     </SafeAreaView> 
   );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
