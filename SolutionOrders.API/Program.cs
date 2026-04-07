@@ -17,6 +17,7 @@ namespace SolutionOrders.API
 
             // MediatR
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -25,10 +26,9 @@ namespace SolutionOrders.API
 
             var app = builder.Build();
 
-            // Automatyczne zastosowanie migracji przy starcie (tylko w środowisku deweloperskim)
-            if (app.Environment.IsDevelopment())
+            // Automatyczne zastosowanie migracji przy starcie
+            using (var scope = app.Services.CreateScope())
             {
-                using var scope = app.Services.CreateScope();
                 try
                 {
                     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
@@ -38,7 +38,6 @@ namespace SolutionOrders.API
                 {
                     var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "Błąd podczas migracji bazy danych");
-                    throw;
                 }
             }
 

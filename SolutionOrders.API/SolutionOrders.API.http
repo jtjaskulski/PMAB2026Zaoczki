@@ -1,4 +1,4 @@
-@SolutionOrders.API_HostAddress = http://localhost:5067
+@SolutionOrders.API_HostAddress = http://localhost:5245
 
 GET {{SolutionOrders.API_HostAddress}}/weatherforecast/
 Accept: application/json

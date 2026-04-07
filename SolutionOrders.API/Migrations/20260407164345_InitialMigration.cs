@@ -35,7 +35,7 @@ namespace SolutionOrders.API.Migrations
                     IdClient = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Adress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -68,7 +68,8 @@ namespace SolutionOrders.API.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -176,7 +177,7 @@ namespace SolutionOrders.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Clients",
-                columns: new[] { "IdClient", "Address", "IsActive", "Name", "PhoneNumber" },
+                columns: new[] { "IdClient", "Adress", "IsActive", "Name", "PhoneNumber" },
                 values: new object[,]
                 {
                     { 1, "ul. Główna 1, Warszawa", true, "Jan Kowalski", "500-100-200" },
@@ -195,11 +196,11 @@ namespace SolutionOrders.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Workers",
-                columns: new[] { "IdWorker", "FirstName", "IsActive", "LastName", "Login" },
+                columns: new[] { "IdWorker", "FirstName", "IsActive", "LastName", "Login", "Password" },
                 values: new object[,]
                 {
-                    { 1, "Piotr", true, "Kowalczyk", "pkowalczyk" },
-                    { 2, "Maria", true, "Wiśniewska", "mwisnieska" }
+                    { 1, "Piotr", true, "Kowalczyk", "pkowalczyk", "haslo123" },
+                    { 2, "Maria", true, "Wiśniewska", "mwisnieska", "haslo456" }
                 });
 
             migrationBuilder.InsertData(

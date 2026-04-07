@@ -1,4 +1,3 @@
-
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -45,9 +44,11 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
 # OSX
 #
 .DS_Store
+
 # Xcode
 #
 build/

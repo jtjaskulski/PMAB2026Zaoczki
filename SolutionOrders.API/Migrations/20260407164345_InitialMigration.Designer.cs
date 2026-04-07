@@ -12,7 +12,7 @@ using SolutionOrders.API.Models.Data;
 namespace SolutionOrders.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260228114420_InitialMigration")]
+    [Migration("20260407164345_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace SolutionOrders.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.3")
+                .HasAnnotation("ProductVersion", "10.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -71,7 +71,7 @@ namespace SolutionOrders.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdClient"));
 
-                    b.Property<string>("Address")
+                    b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
@@ -91,7 +91,7 @@ namespace SolutionOrders.API.Migrations
                         new
                         {
                             IdClient = 1,
-                            Address = "ul. Główna 1, Warszawa",
+                            Adress = "ul. Główna 1, Warszawa",
                             IsActive = true,
                             Name = "Jan Kowalski",
                             PhoneNumber = "500-100-200"
@@ -99,7 +99,7 @@ namespace SolutionOrders.API.Migrations
                         new
                         {
                             IdClient = 2,
-                            Address = "ul. Kwiatowa 5, Kraków",
+                            Adress = "ul. Kwiatowa 5, Kraków",
                             IsActive = true,
                             Name = "Anna Nowak",
                             PhoneNumber = "600-200-300"
@@ -303,6 +303,9 @@ namespace SolutionOrders.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("IdWorker");
 
                     b.ToTable("Workers");
@@ -314,7 +317,8 @@ namespace SolutionOrders.API.Migrations
                             FirstName = "Piotr",
                             IsActive = true,
                             LastName = "Kowalczyk",
-                            Login = "pkowalczyk"
+                            Login = "pkowalczyk",
+                            Password = "haslo123"
                         },
                         new
                         {
@@ -322,7 +326,8 @@ namespace SolutionOrders.API.Migrations
                             FirstName = "Maria",
                             IsActive = true,
                             LastName = "Wiśniewska",
-                            Login = "mwisnieska"
+                            Login = "mwisnieska",
+                            Password = "haslo456"
                         });
                 });
 

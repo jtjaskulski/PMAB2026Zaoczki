@@ -8,11 +8,11 @@ const Counter: React.FC = () => {
 
   // Funkcje obsługi
   const handleIncrement = (): void => {
-    setCount(c => c + 1);
+    setCount(count + 1);
   };
 
   const handleDecrement = (): void => {
-    setCount(c => c - 1);
+    setCount(count - 1);
   };
 
   const handleReset = (): void => {
