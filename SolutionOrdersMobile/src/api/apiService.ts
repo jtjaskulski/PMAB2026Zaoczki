@@ -76,17 +76,17 @@ class ApiService {
   // ========== JEDNOSTKI MIARY ==========
 
   async getUnitOfMeasurements(): Promise<UnitOfMeasurement[]> {
-    return this.request<UnitOfMeasurement[]>('/UnitOfMeasurements');
+    return this.request<UnitOfMeasurement[]>('/UnitOfMeasurement');
   }
 
   async getUnitOfMeasurement(id: number): Promise<UnitOfMeasurement> {
-    return this.request<UnitOfMeasurement>(`/UnitOfMeasurements/${id}`);
+    return this.request<UnitOfMeasurement>(`/UnitOfMeasurement/${id}`);
   }
 
   async createUnitOfMeasurement(
     data: Omit<UnitOfMeasurement, 'idUnitOfMeasurement'>
   ): Promise<{ id: number }> {
-    return this.request<{ id: number }>('/UnitOfMeasurements', {
+    return this.request<{ id: number }>('/UnitOfMeasurement', {
       method: 'POST',
       body: JSON.stringify(data),
     });
@@ -96,14 +96,14 @@ class ApiService {
     id: number,
     data: Partial<UnitOfMeasurement>
   ): Promise<void> {
-    return this.request<void>(`/UnitOfMeasurements/${id}`, {
+    return this.request<void>(`/UnitOfMeasurement/${id}`, {
       method: 'PUT',
       body: JSON.stringify({ ...data, idUnitOfMeasurement: id }),
     });
   }
 
   async deleteUnitOfMeasurement(id: number): Promise<void> {
-    return this.request<void>(`/UnitOfMeasurements/${id}`, {
+    return this.request<void>(`/UnitOfMeasurement/${id}`, {
       method: 'DELETE',
     });
   }
@@ -111,13 +111,13 @@ class ApiService {
   // ========== KATEGORIE ==========
 
   async getCategories(): Promise<Category[]> {
-    return this.request<Category[]>('/Categories');
+    return this.request<Category[]>('/Category');
   }
 
   async createCategory(
     data: Omit<Category, 'idCategory'>
   ): Promise<{ id: number }> {
-    return this.request<{ id: number }>('/Categories', {
+    return this.request<{ id: number }>('/Category', {
       method: 'POST',
       body: JSON.stringify(data),
     });
@@ -127,14 +127,14 @@ class ApiService {
     id: number,
     data: Partial<Category>
   ): Promise<void> {
-    return this.request<void>(`/Categories/${id}`, {
+    return this.request<void>(`/Category/${id}`, {
       method: 'PUT',
       body: JSON.stringify({ ...data, idCategory: id }),
     });
   }
 
   async deleteCategory(id: number): Promise<void> {
-    return this.request<void>(`/Categories/${id}`, {
+    return this.request<void>(`/Category/${id}`, {
       method: 'DELETE',
     });
   }

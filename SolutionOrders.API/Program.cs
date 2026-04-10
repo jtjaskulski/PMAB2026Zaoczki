@@ -4,6 +4,8 @@ using SolutionOrders.API.Features.Items.Providers;
 using SolutionOrders.API.Features.Items.Services;
 using SolutionOrders.API.Models.Data;
 using System.Reflection;
+using SolutionOrders.API.Features.Categories.Providers;
+using SolutionOrders.API.Features.UnitsOfMeasurement.Providers;
 
 namespace SolutionOrders.API
 {
@@ -52,7 +54,9 @@ namespace SolutionOrders.API
 
         private static void RegisterProviders(WebApplicationBuilder builder)
         {
-            builder.Services.AddTransient<IItemProvider, IItemProvider>();
+            builder.Services.AddTransient<IItemProvider, ItemProvider>();
+            builder.Services.AddTransient<ICategoryProvider, CategoryProvider>();
+            builder.Services.AddTransient<IUnitOfMeasurementProvider, UnitOfMeasurementProvider>();
         }
 
         private static void SetUpCorsPolicy(WebApplicationBuilder builder)

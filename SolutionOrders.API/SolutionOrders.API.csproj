@@ -27,7 +27,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Categories\Handlers\Commands\" />
+    <Folder Include="Features\Categories\Messages\Commands\" />
+    <Folder Include="Features\Categories\Services\" />
+    <Folder Include="Features\Categories\Validators\Commands\" />
+    <Folder Include="Features\Categories\Validators\Queries\" />
     <Folder Include="Features\Items\Validators\Queries\" />
+    <Folder Include="Features\UnitsOfMeasurement\Handlers\Commands\" />
+    <Folder Include="Features\UnitsOfMeasurement\Messages\Commands\" />
+    <Folder Include="Features\UnitsOfMeasurement\Services\" />
+    <Folder Include="Features\UnitsOfMeasurement\Validators\Commands\" />
+    <Folder Include="Features\UnitsOfMeasurement\Validators\Queries\" />
   </ItemGroup>
 
 </Project>
