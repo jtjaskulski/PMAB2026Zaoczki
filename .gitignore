@@ -109,5 +109,6 @@ xcuserdata/
 # Metro bundler
 .metro-health-check*
 /.vs
+.vs/
 /.idea
 *.csproj.user

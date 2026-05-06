@@ -1,35 +1,61 @@
-import React from 'react';
-import { View, StatusBar, useColorScheme, StyleSheet } from 'react-native';
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ItemsProvider } from './src/context/ItemsContext';
-import RootNavigator from './src/navigation/RootNavigator';
+import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+
+import LoginScreen from './src/screens/LoginScreen';
+import HomeScreen from './src/screens/HomeScreen';
+import CrudScreen from './src/screens/CrudScreen';
+
+export type ModuleName =
+  | 'Rowery'
+  | 'Klienci'
+  | 'Wypożyczenia'
+  | 'Serwis'
+  | 'Płatności'
+  | 'Typy rowerów'
+  | 'Kategorie'
+  | 'Metody Płatności';
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [screen, setScreen] = useState<'home' | 'crud'>('home');
+  const [currentModule, setCurrentModule] = useState<ModuleName>('Rowery');
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setScreen('home');
+  };
+
+  const openModule = (moduleName: ModuleName) => {
+    setCurrentModule(moduleName);
+    setScreen('crud');
+  };
 
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ItemsProvider>
-        <AppContent />
-      </ItemsProvider>
+      <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+        {!isLoggedIn ? (
+          <LoginScreen onLogin={() => setIsLoggedIn(true)} />
+        ) : screen === 'home' ? (
+          <HomeScreen
+            onOpenModule={openModule}
+            onLogout={handleLogout}
+          />
+        ) : (
+          <CrudScreen
+            moduleName={currentModule}
+            onBack={() => setScreen('home')}
+          />
+        )}
+      </SafeAreaView>
     </SafeAreaProvider>
-  );
-}
-
-function AppContent(): React.JSX.Element {
-  const insets = useSafeAreaInsets();
-
-  return (
-    <View style={[styles.container, { paddingTop: insets.top }]}>
-      <RootNavigator />
-    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#0F172A',
   },
 });
 
